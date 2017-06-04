@@ -21,10 +21,29 @@ defmodule GameOfLife.Board do
   @doc """
   Returns new board filled with given cells
   """
-  @spec new([row :: [cell_state, ...]]) :: t
+  @spec new([row :: [cell_state, ...]] | String.t) :: t
   def new(rows) when is_list(rows) do
     %__MODULE__{cells: cells_from_rows(rows), step: 0}
   end
+
+  @doc ~S"""
+  Constructs board rows from string description
+
+  Returned rows can be later given to `new/1`. In the given string
+  "." means a dead cell, and "*" means an alive cell.
+  """
+  @spec rows_from_string!(String.t) :: [row :: [cell_state, ...]]
+  def rows_from_string!(str) do
+    str
+    |> String.splitter("\n", trim: true)
+    |> Stream.map(fn row_str ->
+      row_str
+      |> String.split("", trim: true)
+      |> Enum.map(&state_from_string/1)
+    end)
+    |> Enum.to_list()
+  end
+
 
   @doc """
   Computes one step of automaton and returns updated board
@@ -107,12 +126,18 @@ defmodule GameOfLife.Board do
         |> Enum.map(fn {_, row} ->
             row
             |> Enum.sort(fn {ind1, _}, {ind2, _} -> ind1 <= ind2 end)
-            |> Enum.map(fn {_, state} -> state end)
+            |> Enum.map(fn {_, state} -> state_to_str(state) end)
         end)
       Enum.reduce(rows, "", fn row, acc ->
-        acc <> "\n" <> Enum.join(row, " | ")
+        acc <> "\n" <> Enum.join(row, "")
       end)
       |> String.trim_leading("\n")
     end
+
+    defp state_to_str(0), do: "."
+    defp state_to_str(1), do: "*"
   end
+
+  defp state_from_string("."), do: 0
+  defp state_from_string("*"), do: 1
 end
