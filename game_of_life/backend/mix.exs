@@ -14,7 +14,7 @@ defmodule GameOfLife.Mixfile do
   end
 
   def application do
-    [mod: {GameOfLife, []},
+    [mod: {GameOfLife.Application, []},
      extra_applications: [:logger]]
   end
 
