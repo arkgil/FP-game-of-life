@@ -96,4 +96,23 @@ defmodule GameOfLife.Board do
   defp make_cell_transition(0, 3 = _alive, _), do: 1
   defp make_cell_transition(1, alive, _) when alive in 2..3, do: 1
   defp make_cell_transition(_, _, _), do: 0
+
+  defimpl String.Chars do
+    import Kernel, except: [to_string: 1]
+
+    def to_string(board) do
+      rows =
+        board.cells
+        |> Enum.sort(fn {ind1, _}, {ind2, _} -> ind1 <= ind2 end)
+        |> Enum.map(fn {_, row} ->
+            row
+            |> Enum.sort(fn {ind1, _}, {ind2, _} -> ind1 <= ind2 end)
+            |> Enum.map(fn {_, state} -> state end)
+        end)
+      Enum.reduce(rows, "", fn row, acc ->
+        acc <> "\n" <> Enum.join(row, " | ")
+      end)
+      |> String.trim_leading("\n")
+    end
+  end
 end
