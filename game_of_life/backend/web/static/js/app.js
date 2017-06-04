@@ -1,3 +1,4 @@
 import "phoenix_html"
 
-import socket from "./socket"
+require("./game-of-life-visualization");
+require("./game-of-life-visualization-jsdeps");
