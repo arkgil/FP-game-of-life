@@ -1,7 +1,7 @@
 <div class="jumbotron">
   <div class="container">
-    <h2>Game of Life</h2>
-    <p id="golStats">Waiting for the simulation to start</p>
-    <canvas id="golCanvas" width="600" height="600"></canvas>
+    <h2>Conway's Game of Life</h2>
+    <p id="golStats"></p>
+    <canvas id="golCanvas" width="600" height="400"></canvas>
   </div>
 </div>
