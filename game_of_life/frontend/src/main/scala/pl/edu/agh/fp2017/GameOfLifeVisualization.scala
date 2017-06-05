@@ -15,7 +15,7 @@ object GameOfLifeVisualization extends JSApp {
   private var board = Board()
   private var step  = 0
 
-  override def main(): Unit = {
+  def main() {
     initWebsocket()
 
     val canvas: Canvas = document.getElementById("golCanvas")
@@ -32,7 +32,7 @@ object GameOfLifeVisualization extends JSApp {
       timeout = 20)
   }
 
-  private def initWebsocket() = {
+  private def initWebsocket() {
     val socket = new Socket("/socket")
     socket.connect()
 
@@ -41,14 +41,16 @@ object GameOfLifeVisualization extends JSApp {
       .receive("ok",    resp => console.log("Joined successfully", resp))
       .receive("error", resp => console.log("Unable to join", resp))
 
-    channel.on("new:generation", (generation: Generation) => {
+    def onNewGeneration(generation: Generation) {
       val cells = generation.cells
         .map(cell => Cell(cell.col, cell.row, cell.state.color))
         .toList
 
       step  = generation.step
       board = Board(cells)
-    })
+    }
+
+    channel.on("new:generation", onNewGeneration)
   }
 }
 
