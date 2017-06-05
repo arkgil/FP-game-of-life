@@ -13,11 +13,9 @@ class Board(val aliveCells: List[Cell]) {
 }
 
 object Board {
-  type Color = String
-
   def apply() = new Board(Nil)
   def apply(aliveCells: List[Cell]) = new Board(aliveCells)
 
-  final case class Cell(x: Int, y: Int, color: Color)
+  final case class Cell(x: Int, y: Int, color: String)
   final case class Area(topLeftX: Int, topLeftY: Int, cols: Int, rows: Int)
 }

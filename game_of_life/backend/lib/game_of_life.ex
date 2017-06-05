@@ -104,6 +104,6 @@ defmodule GameOfLife do
     [row_as_list | acc]
   end
 
-  defp cell_color(1), do: "green"
-  defp cell_color(0), do: "red"
+  defp cell_color(1), do: "#3949ab"
+  defp cell_color(0), do: "#999999"
 end

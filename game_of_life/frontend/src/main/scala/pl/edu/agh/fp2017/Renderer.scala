@@ -4,8 +4,10 @@ import org.scalajs.dom
 import pl.edu.agh.fp2017.Board.{Area, Cell}
 
 class Renderer(canvas: dom.html.Canvas) {
-  type Ctx2D = dom.CanvasRenderingContext2D
-  private val ctx = canvas.getContext("2d").asInstanceOf[Ctx2D]
+
+  import Implicits._
+
+  private val ctx: Ctx2D = canvas.getContext("2d")
 
   def draw(board: Board, area: Area) {
     val w = canvas.width  / area.cols
