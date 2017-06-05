@@ -10,7 +10,7 @@ defmodule GameOfLife do
   require Record
   require Logger
 
-  @default_interval 1_000
+  @default_interval 250
   @supervisor GameOfLife.Supervisor
   @channel_topic "visualization"
 
