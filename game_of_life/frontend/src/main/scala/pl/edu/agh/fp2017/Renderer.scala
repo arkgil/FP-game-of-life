@@ -3,6 +3,8 @@ package pl.edu.agh.fp2017
 import org.scalajs.dom
 import pl.edu.agh.fp2017.Board.{Area, Cell}
 
+import scala.math.min
+
 class Renderer(canvas: dom.html.Canvas) {
 
   import Implicits._
@@ -10,8 +12,8 @@ class Renderer(canvas: dom.html.Canvas) {
   private val ctx: Ctx2D = canvas.getContext("2d")
 
   def draw(board: Board, area: Area) {
-    val w = canvas.width  / area.cols
-    val h = canvas.height / area.rows
+    val w = min(canvas.width / area.cols, canvas.height / area.rows)
+    val h = min(canvas.width / area.cols, canvas.height / area.rows)
 
     def drawCell(cell: Cell) {
       val Cell(x, y, color) = cell
