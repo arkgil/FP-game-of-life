@@ -14,5 +14,5 @@ main = defaultMain tests
 tests :: TestTree
 tests =
     testGroup "Functors"
-    [ testProperty "Functor preserves identity morphism"        propPreserveIdentityMorphism ]
---    , testProperty "Functor preserves composition of morphisms" propPreserveCompositionOfMorphisms ]
+    [ testProperty "Functor preserves identity morphism"        propPreserveIdentityMorphism
+    , testProperty "Functor preserves composition of morphisms" propPreserveCompositionOfMorphisms ]

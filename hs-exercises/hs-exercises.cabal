@@ -21,6 +21,7 @@ executable hs-exercises-exe
 test-suite hs-exercises-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
+  other-modules:       FunctorTests
   main-is:             MainTestSuite.hs
   build-depends:       base
                      , hs-exercises
