@@ -22,6 +22,7 @@ test-suite hs-exercises-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
   other-modules:       FunctorTests
+                     , MonadTests
   main-is:             MainTestSuite.hs
   build-depends:       base
                      , hs-exercises
