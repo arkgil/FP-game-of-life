@@ -88,4 +88,37 @@ defmodule GameOfLife.Examples do
     """
     |> GameOfLife.Board.rows_from_string!()
   end
+
+  def dinner_table do
+    """
+    .*...........
+    .***.......**
+    ....*......*.
+    ...**....*.*.
+    .........**..
+    ......*......
+    ....**.*.....
+    .............
+    ..*...*..*...
+    .*.**....*...
+    .*......*....
+    **.......***.
+    ...........*.
+    """
+    |> GameOfLife.Board.rows_from_string!()
+  end
+
+  def tumbler do
+    """
+    .*.....*.
+    *.*...*.*
+    *..*.*..*
+    ..*...*..
+    ..**.**..
+    .........
+    .........
+    .........
+    """
+    |> GameOfLife.Board.rows_from_string!()
+  end
 end
