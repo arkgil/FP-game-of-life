@@ -1,7 +1,7 @@
 <div class="jumbotron">
   <div class="container">
     <h2>Conway's Game of Life</h2>
-    <p id="golStats"></p>
+    <p id="golStats">Waiting for automaton to start</p>
     <canvas id="golCanvas" width="600" height="400"></canvas>
   </div>
 </div>
