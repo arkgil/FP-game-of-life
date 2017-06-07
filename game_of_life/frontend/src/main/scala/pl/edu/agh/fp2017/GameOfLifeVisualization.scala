@@ -12,27 +12,26 @@ object GameOfLifeVisualization extends JSApp {
 
   import Implicits._
 
-  private var board = Board()
-  private var step  = 0
-
   def main() {
-    initWebsocket()
-
     val canvas: Canvas = document.getElementById("golCanvas")
     val stats: Element = document.getElementById("golStats")
 
     val renderer = new Renderer(canvas)
     val area = Area(0, 0, 36, 22)
 
-    dom.window.setInterval(
-      () => {
-        stats.innerHTML = s"Automaton step: $step"
-        renderer.draw(board, area)
-      },
-      timeout = 20)
+    def enqueueUiUpdateCallback(board: Board, step: Int) {
+      dom.window.setTimeout(
+        () => {
+          stats.innerHTML = s"Automaton step: $step"
+          renderer.draw(board, area)
+        },
+        timeout = 0)
+    }
+
+    initWebsocket(enqueueUiUpdateCallback)
   }
 
-  private def initWebsocket() {
+  private def initWebsocket(enqueueUiUpdateCallback: (Board, Int) => Unit) {
     val socket = new Socket("/socket")
     socket.connect()
 
@@ -46,8 +45,7 @@ object GameOfLifeVisualization extends JSApp {
         .map(cell => Cell(cell.col, cell.row, cell.state.color))
         .toList
 
-      step  = generation.step
-      board = Board(cells)
+      enqueueUiUpdateCallback(Board(cells), generation.step)
     }
 
     channel.on("new:generation", onNewGeneration)
